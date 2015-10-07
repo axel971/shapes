@@ -1,13 +1,12 @@
 #software
 
-You nedd to install the following libraries for this project : <br>
+You need to install the following libraries for this project : <br>
 VTK <br>
+EIGEN3 <br>
 
+Instructions for compilation (linux) : <br>
 
-Instructions for compilation: <br>
-(for linux) <br> 
-
-cmake -H. -Boucompile/ <br>
+cmake -H. -Bcompile/ <br>
 cd compile <br>
 make 
 
