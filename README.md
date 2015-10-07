@@ -1,4 +1,4 @@
-#software
+#statistical shape analysis
 
 You need to install the following libraries for this project : <br>
 VTK <br>
