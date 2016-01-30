@@ -1,3 +1,5 @@
+#ifndef SHAPE2D_HPP 
+#define SHAPE2D_HPP
 
 #include <iostream>
 #include <vector>
@@ -5,19 +7,7 @@
 #include <fstream>
 #include <sstream>
 
-
-#include <vtkVersion.h>
-#include <vtkSmartPointer.h>
- 
-#include <vtkChartXY.h>
-#include <vtkContextScene.h>
-#include <vtkContextView.h>
-#include <vtkFloatArray.h>
-#include <vtkPlotPoints.h>
-#include <vtkRenderWindow.h>
-#include <vtkRenderWindowInteractor.h>
-#include <vtkRenderer.h>
-#include <vtkTable.h>
+#include <eigen3/Eigen/Dense>
 
     
 
@@ -33,17 +23,19 @@ class Shape2D
 
   Shape2D();
 
-
-  double getX(int i);
-  double getY(int i);
-
+  std::vector<double> x();
+  std::vector<double> y();
+  double x(int i);
+  double y(int i);
+  void x(int, double);
+  void y(int, double);
   void loadLineFile(std::string fileName);
   void loadLineFlux(std::istringstream& line);
   void normalize();
-  void show();
   int size();
   void mean(double& meanX, double& meanY);
   void centered();
+  
 };
 
-
+#endif

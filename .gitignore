@@ -1,6 +1,6 @@
 
 # Ignorer les backups emacs :
 *~
-compile/*
-uml/argoUml/*
-
+build/*
+doc/uml/argoUml/*
+output/*

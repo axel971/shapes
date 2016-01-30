@@ -1,56 +1,17 @@
-#include "Shapes2D.hpp"
-
+#include "ViewShapes2D.hpp"
 
 using namespace std;
 
-
-Shapes2D::Shapes2D()
+ViewShapes2D::ViewShapes2D()
 {}
 
-void Shapes2D::load(string fileName)
+
+void ViewShapes2D::setShape(shape::Shapes2D *ptrShapes)
 {
-  m_fileName = fileName;
-
-  ifstream file(fileName, ios::in);
-
-  if(file)
-    {
-
-      //Read the current line and save the x,y coordinates
-      string lineString;
-      while(getline(file, lineString))
-	{
-	  istringstream line(lineString); //Convert lineString into a flux
-
-	  //Save the current landmarks in a shape
-	  Shape2D shape; 
-	  shape.loadLineFlux(line);
-	  
-	  //Save this Shape in our vector array structure
-	  m_data.push_back(shape);
-	}
-    }
-  else
-    {
-      cerr << "The file couldn't be loaded" << endl;
-    }
+  m_ptrShapes = ptrShapes;
 }
 
-
-int Shapes2D::numberOfLandmarksByShape()
-{
-  if(m_data.size() > 0)
-    return m_data[0].size();
-  else
-    return 0;
-
-}
-int Shapes2D::numberOfShape()
-{
-  return m_data.size();
-}
-
-void Shapes2D::show()
+void ViewShapes2D::exec()
 {
   // Set up a 2D scene, add an XY chart to it
   vtkSmartPointer<vtkContextView> view = vtkSmartPointer<vtkContextView>::New();
@@ -62,7 +23,7 @@ void Shapes2D::show()
   chart->SetShowLegend(false);
   
   
-  for(int i = 0; i < numberOfShape(); ++i)
+  for(int i = 0; i < m_ptrShapes->numberOfShape(); ++i)
       {
 	//Create a table with some points in it...
 	vtkSmartPointer<vtkTable> table = vtkSmartPointer<vtkTable>::New();
@@ -76,12 +37,12 @@ void Shapes2D::show()
 	table->AddColumn(arrY);
   
 	//Test charting with a few more points...
-	table->SetNumberOfRows(numberOfLandmarksByShape());
+	table->SetNumberOfRows(m_ptrShapes->numberOfLandmarksByShape());
   
-	for (int j = 0; j < numberOfLandmarksByShape(); ++j)
+	for (int j = 0; j < m_ptrShapes->numberOfLandmarksByShape(); ++j)
 	  {
-	    table->SetValue(j, 0, m_data[i].getX(j));
-	    table->SetValue(j, 1, m_data[i].getY(j));
+	    table->SetValue(j, 0, (*m_ptrShapes)[i].x(j));
+	    table->SetValue(j, 1, (*m_ptrShapes)[i].y(j));
 	  }
 	
 	//Add multiple scatter plots, setting the colors etc
@@ -101,10 +62,4 @@ void Shapes2D::show()
     view->GetInteractor()->Initialize();
     view->GetInteractor()->Start();
 
-}
-
-void Shapes2D::centered()
-{
-  for(vector<Shape2D>::iterator it = m_data.begin(); it < m_data.end(); ++it)
-    (*it).centered();
 }
