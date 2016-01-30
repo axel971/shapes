@@ -3,4 +3,4 @@
 *~
 build/*
 doc/uml/argoUml/*
-output/*
+output/bin/*
