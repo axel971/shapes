@@ -1,12 +1,16 @@
-#statistical shape analysis
+#Statistical Shape Analysis Tools
+The main purpose of this project is to implement some tools from the field of statistical shape analysis.
+At this moment this programm only do a rigid registration of a point cloud thank to a Procrustes distance. The data are landmarks posed on male gorilla cranes or digit 3.
 
-You need to install the following libraries for this project : <br>
+The libraries that you need to install are the following : <br>
 VTK <br>
 EIGEN3 <br>
 
-Instructions for compilation (linux) : <br>
+Here you can find the instructions to compile the project on linux : <br>
 
-cmake -H. -Bcompile/ <br>
-cd compile <br>
-make 
-
+cmake -H. -Bbuild/ <br>
+cd build <br>
+make  <br>
+cd .. <br>
+cd output/bin/ <br>
+./exampleProcruste ../../data/gorm.dat <br>
