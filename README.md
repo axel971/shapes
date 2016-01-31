@@ -6,7 +6,7 @@ The libraries that you need to install are the following : <br>
 VTK <br>
 EIGEN3 <br>
 
-Here you can find the instructions to compile the project on linux : <br>
+Here you can find the instructions to compile and execute the project on linux : <br>
 
 cmake -H. -Bbuild/ <br>
 cd build <br>
